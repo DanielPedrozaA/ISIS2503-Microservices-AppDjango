@@ -1,4 +1,4 @@
-from .models import Measurement
+from .models import Place
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
@@ -19,7 +19,7 @@ def check_variable(data):
 
 
 def PlaceList(request):
-    queryset = Measurement.objects.all()
+    queryset = Place.objects.all()
     context = list(queryset.values('id', 'name'))
     return JsonResponse(context, safe=False)
 
@@ -51,5 +51,5 @@ def PlacesCreate(request):
             else:
                 return HttpResponse("unsuccessfully created places. Variable does not exist")
 
-        Measurement.objects.bulk_create(places_list)
+        Place.objects.bulk_create(places_list)
         return HttpResponse("successfully created places")
