@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Place(models.Model):
-    id = models.IntegerField(null=False, default=None)
+    id = models.IntegerField(null=False, default=None, primary_key=True)
     name = models.CharField(null=False, default=None, max_length=50)
 
     def __str__(self):
