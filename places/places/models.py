@@ -1,8 +1,9 @@
 from django.db import models
 
 
-class Places(models.Model):
-    name = models.CharField(max_length=50)
+class Place(models.Model):
+    id = models.IntegerField(null=False, default=None)
+    name = models.CharField(null=False, default=None, max_length=50)
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '%s %s' % (self.value, self.unit)

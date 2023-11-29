@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'variables',
+    'measurements',
 ]
 
 MIDDLEWARE = [
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'places_db',
-        'USER': 'places_user',
-        'PASSWORD': 'isis2503',
-        'HOST': '0.0.0.0',
-        'PORT': '5432',
+        'NAME': os.environ.get("MEASUREMENTS_DB", "measurements_db"),
+        'USER': os.environ.get("MEASUREMENTS_DB_USER", "measurements_user"),
+        'PASSWORD': os.environ.get("MEASUREMENTS_DB_PASSWD", "isis2503"),
+        'HOST': os.environ.get("MEASUREMENTS_DB_HOST", "0.0.0.0"),
+        'PORT': os.environ.get("MEASUREMENTS_DB_PORT", "5432")
     }
 }
 
@@ -132,3 +132,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+PATH_VAR = "http://" + os.environ.get("VARIABLES_HOST", "0.0.0.0") + ":" + os.environ.get("VARIABLES_PORT", "8080") + "/variables"
